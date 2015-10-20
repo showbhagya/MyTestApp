@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Mytest2</string>
+    <string name="action_settings">Settings</string>
+    <!--<string-array name="fruits">apples,banana,custard,orange,grapes,pineapple</string-array>-->
+    <string-array name="fruits">
+        <item> apple</item>
+        <item> banana</item>
+        <item> orange</item>
+        <item>custard</item>
+        <item>grapes</item>
+        <item>pineapple</item>
+    </string-array>
+    <string name="app_name1">Multiple Selection ListView</string>
+    <string name="multi">multi!</string>
+    <string name="delete">Delete</string>
+
+    </resources>
