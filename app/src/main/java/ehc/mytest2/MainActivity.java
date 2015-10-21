@@ -36,8 +36,10 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 
+import java.util.ListIterator;
 import java.util.zip.Inflater;
 
 public class MainActivity extends AppCompatActivity {
@@ -62,7 +64,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         theList = (ListView) findViewById(R.id.theList);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         /*ActionBar actionBar = getActionBar();
@@ -129,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                 //fruits item=this.fruits.get(position);
                 Log.d("test123", "setOnItemLongClickListener :");
                 selectedIndex = position;
-                CheckBox checkbox = (CheckBox) view.findViewById(R.id.check_box);
+                checkbox = (CheckBox) view.findViewById(R.id.check_box);
 //                checkbox.setVisibility(View.GONE);
                 checkbox.setChecked(true);
                 goneFlag = true;
@@ -185,19 +186,15 @@ public class MainActivity extends AppCompatActivity {
         } else if (id == R.id.action_name) {
             //do something
             if (checkbox.isChecked()) {
-                fruititems.remove(selectedIndex);
+                fruititems.removeAll(selectedFruits);
                 checkbox.setChecked(false);
                 checkbox.setVisibility(View.GONE);
                 theAdapter.notifyDataSetChanged();
                 Toast.makeText(this, "delete menu was clicked", Toast.LENGTH_SHORT).show();
-                finish();
             }
             return true;
         } else if (id == R.id.home) {
-//                    onBackPressed();
-
-
-            checkbox.setVisibility(View.INVISIBLE);
+            checkbox.setVisibility(View.GONE);
             theAdapter.notifyDataSetChanged();
             Toast.makeText(this, "About menu was clicked", Toast.LENGTH_SHORT).show();
             return true;
@@ -290,16 +287,15 @@ public class MainActivity extends AppCompatActivity {
                 checkbox.setVisibility(View.VISIBLE);
             else
                 checkbox.setVisibility(View.GONE);
-
+            Log.d("test123", "postion: " + position);
             checkbox.setTag(position);
 
             checkbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     Log.d("test123", "setOnCheckedChangeListener" + ((Integer) checkbox.getTag()));
-
                     String fruit = fruititems.get(((Integer) checkbox.getTag()));
-
+                    Log.d("test1", "selected Fruites: " + selectedFruits);
                     if (selectedFruits.contains(fruit)) {
                         selectedFruits.remove(fruit);
                     } else {
@@ -311,7 +307,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
             listItem.setText(fruititems.get(position));
-
 
             return convertView;
         }
