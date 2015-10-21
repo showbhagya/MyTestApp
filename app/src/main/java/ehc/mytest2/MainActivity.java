@@ -173,34 +173,31 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            //do something
-            Log.d("test123", "selected index " + selectedIndex);
-            Toast.makeText(this, "Settings menu was clicked", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-        if (id == R.id.about) {
-            //do something
-            Toast.makeText(this, "About menu was clicked", Toast.LENGTH_SHORT).show();
-            return true;
-        } else if (id == R.id.action_name) {
-            //do something
-            if (checkbox.isChecked()) {
-                fruititems.removeAll(selectedFruits);
-                checkbox.setChecked(false);
+        switch (id) {
+            case R.id.action_settings:
+                Log.d("test123", "selected index " + selectedIndex);
+                Toast.makeText(this, "Settings menu was clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.about:
+                Toast.makeText(this, "About menu was clicked", Toast.LENGTH_SHORT).show();
+                return true;
+            case R.id.action_name:
+                if (checkbox.isChecked()) {
+                    fruititems.removeAll(selectedFruits);
+                    checkbox.setChecked(false);
+                    checkbox.setVisibility(View.GONE);
+                    theAdapter.notifyDataSetChanged();
+                    Toast.makeText(this, "delete menu was clicked", Toast.LENGTH_SHORT).show();
+                }
+                return true;
+            case android.R.id.home:
                 checkbox.setVisibility(View.GONE);
                 theAdapter.notifyDataSetChanged();
-                Toast.makeText(this, "delete menu was clicked", Toast.LENGTH_SHORT).show();
-            }
-            return true;
-        } else if (id == R.id.home) {
-            checkbox.setVisibility(View.GONE);
-            theAdapter.notifyDataSetChanged();
-            Toast.makeText(this, "About menu was clicked", Toast.LENGTH_SHORT).show();
-            return true;
+                goneFlag = false;
+                Toast.makeText(this, "Home Button was clicked", Toast.LENGTH_SHORT).show();
+                return true;
         }
         return super.onOptionsItemSelected(item);
-
     }
 
     @Override
